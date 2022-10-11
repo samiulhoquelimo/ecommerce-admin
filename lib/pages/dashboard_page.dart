@@ -1,8 +1,10 @@
+import 'package:ecommerce_admin/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../customwidgets/dashboard_item_view.dart';
 import '../models/dashboard_item.dart';
+import '../providers/order_provider.dart';
 import '../providers/product_provider.dart';
 import 'category_page.dart';
 import 'product_page.dart';
@@ -17,6 +19,7 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<ProductProvider>(context, listen: false).getAllCategories();
     Provider.of<ProductProvider>(context, listen: false).getAllProducts();
+    Provider.of<OrderProvider>(context, listen: false).getOrderConstants();
     //Provider.of<OrderProvider>(context, listen: false).getAllOrders();
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +59,7 @@ class DashboardPage extends StatelessWidget {
         route = UserPage.routeName;
         break;
       case DashboardItem.settings:
-        //route = SettingsPage.routeName;
+        route = SettingsPage.routeName;
         break;
       case DashboardItem.report:
         //route = ReportPage.routeName;

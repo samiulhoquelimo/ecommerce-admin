@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../db/db_helper.dart';
 import '../models/order_constants_model.dart';
 import '../models/order_model.dart';
 
@@ -7,14 +8,17 @@ class OrderProvider extends ChangeNotifier {
   OrderConstantsModel orderConstantsModel = OrderConstantsModel();
   List<OrderModel> orderList = [];
 
+  Future<void> getOrderConstants() async {
+    DbHelper.getOrderConstants().listen((snapshot) {
+      if (snapshot.exists) {
+        orderConstantsModel = OrderConstantsModel.fromMap(snapshot.data()!);
+        notifyListeners();
+      }
+    });
+  }
+
 /*Future<void> addOrderConstants(OrderConstantsModel model) =>
       DbHelper.addOrderConstants(model);
-
-  Future<void> getOrderConstants() async {
-    final snapshot = await DbHelper.getOrderConstants();
-    orderConstantsModel = OrderConstantsModel.fromMap(snapshot.data()!);
-    notifyListeners();
-  }
 
   void getAllOrders() {
     DbHelper.getAllOrders().listen((event) {
@@ -98,5 +102,4 @@ class OrderProvider extends ChangeNotifier {
     }
     return filteredList;
   }*/
-
 }

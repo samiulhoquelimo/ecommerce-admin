@@ -34,7 +34,13 @@ class ProductPage extends StatelessWidget {
                         context, ProductDetailsPage.routeName,
                         arguments: product.id),
                     title: Text(
-                      product.name!,
+                      product.name,
+                      style: TextStyle(
+                          color:
+                              product.available ? Colors.black : Colors.grey),
+                    ),
+                    subtitle: Text(
+                      product.category,
                       style: TextStyle(
                           color:
                               product.available ? Colors.black : Colors.grey),
